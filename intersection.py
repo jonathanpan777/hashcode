@@ -1,8 +1,9 @@
+import numpy as np
+
 class Intersection:
-  def __init__(self, streets, incoming, outgoing, num):
+  def __init__(self, incoming, outgoing, num):
     self.incoming = incoming
     self.outgoing = outgoing
-    self.streets = streets
     self.weights = None
     self.num = num
     self.counts = [0] * len(incoming)
@@ -14,7 +15,7 @@ def set_weights(self, weights):
 	self.weights = weights
 	
 def get_cycle_from_weights(self, outfile):
-	self.max_cycle_len = 10#can be changed later
+	self.max_cycle_len = 1000000000#can be changed later
 	if(self.weights == None):
 		self.init_weights()
 	l = len(self.weights)
@@ -33,13 +34,22 @@ def get_cycle_from_weights(self, outfile):
 	print(self.weights, self.incoming)
 	cycle_len = min(self.max_cycle_len, 1/min(self.weights))
 
-	self.weights *= cycle_len
+      if self.weights[i] == 0:
+        self.weights.pop(i)
+        self.incoming.pop(i)
+        i -= 1
+        l-=1
+      i += 1
 
-	outfile.write(self.num)
-	outfile.write(len(weights))
-	for i in range(len(self.weights)):
-		outfile.write(self.incoming[i] + " " + str(int(self.weights[i])))
+    self.weights = np.array(self.weights)/sum(self.weights)
+    cycle_len = min(self.max_cycle_len, 1/min(self.weights))
 
+    self.weights *= cycle_len
 
-if __name__ == '__main__':
-	weights()
+    outfile.write(str(self.num))
+    outfile.write('\n')
+    outfile.write(str(len(self.weights)))
+    outfile.write('\n')
+    for i in range(len(self.weights)):
+      outfile.write(self.incoming[i].name + " " + str(int(self.weights[i])))
+      outfile.write('\n')
