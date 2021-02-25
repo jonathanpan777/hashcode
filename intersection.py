@@ -1,6 +1,40 @@
 class Intersection:
-  def __init__(self, length, streets, incoming, outgoing):
-    self.length = length
+  def __init__(self, streets, incoming, outgoing, num):
     self.incoming = incoming
     self.outgoing = outgoing
     self.streets = streets
+    self.weights = None
+    self.num = num
+
+def init_weights(self):
+	self.weights = np.ones(len(self.incoming_streets))/len(incoming_streets)
+	
+def get_cycle_from_weights(self, outfile):
+	self.max_cycle_len = 10
+	if(self.weights == None):
+		self.init_weights()
+	l = len(self.weights)
+	i = 0
+	while(i < l):
+
+		if self.weights[i] == 0:
+			self.weights.pop(i)
+			self.incoming_streets.pop(i)
+			i -= 1
+			l-=1
+		i += 1
+
+	self.weights = np.array(weights)/sum(self.weights)
+	print(self.weights, self.incoming_streets)
+	cycle_len = min(self.max_cycle_len, 1/min(self.weights))
+
+	self.weights *= cycle_len
+
+	outfile.write(self.num)
+	outfile.write(len(weights))
+	for i in range(len(self.weights)):
+		outfile.write(self.incoming_streets[i] + " " + str(int(self.weights[i])))
+
+
+if __name__ == '__main__':
+	weights()
