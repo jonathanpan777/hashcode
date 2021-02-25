@@ -7,7 +7,7 @@ class Intersection:
     self.num = num
 
 def init_weights(self):
-	self.weights = np.ones(len(self.incoming_streets))/len(incoming_streets)
+	self.weights = np.ones(len(self.incoming))/len(incoming)
 	
 def get_cycle_from_weights(self, outfile):
 	self.max_cycle_len = 10
@@ -19,13 +19,13 @@ def get_cycle_from_weights(self, outfile):
 
 		if self.weights[i] == 0:
 			self.weights.pop(i)
-			self.incoming_streets.pop(i)
+			self.incoming.pop(i)
 			i -= 1
 			l-=1
 		i += 1
 
 	self.weights = np.array(weights)/sum(self.weights)
-	print(self.weights, self.incoming_streets)
+	print(self.weights, self.incoming)
 	cycle_len = min(self.max_cycle_len, 1/min(self.weights))
 
 	self.weights *= cycle_len
@@ -33,7 +33,7 @@ def get_cycle_from_weights(self, outfile):
 	outfile.write(self.num)
 	outfile.write(len(weights))
 	for i in range(len(self.weights)):
-		outfile.write(self.incoming_streets[i] + " " + str(int(self.weights[i])))
+		outfile.write(self.incoming[i] + " " + str(int(self.weights[i])))
 
 
 if __name__ == '__main__':
