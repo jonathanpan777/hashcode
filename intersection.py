@@ -5,16 +5,21 @@ class Intersection:
     self.streets = streets
     self.weights = None
     self.num = num
+    self.counts = [0] * len(incoming)
 
 def init_weights(self):
 	self.weights = np.ones(len(self.incoming))/len(incoming)
+
+def set_weights(self, weights):
+	self.weights = weights
 	
 def get_cycle_from_weights(self, outfile):
-	self.max_cycle_len = 10
+	self.max_cycle_len = 10#can be changed later
 	if(self.weights == None):
 		self.init_weights()
 	l = len(self.weights)
 	i = 0
+
 	while(i < l):
 
 		if self.weights[i] == 0:
