@@ -51,5 +51,5 @@ def get_cycle_from_weights(self, outfile):
     outfile.write(str(len(self.weights)))
     outfile.write('\n')
     for i in range(len(self.weights)):
-      outfile.write(self.incoming[i].name + " " + str(int(self.weights[i])))
+      outfile.write(self.incoming[i].name + " " + str(ceil(self.weights[i])))
       outfile.write('\n')
